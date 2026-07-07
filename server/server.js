@@ -55,8 +55,12 @@ app.use("/api/upload", uploadRoutes);
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "login.html"));
 });
-// ================= SOCKET EVENTS =================
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "login.html"));
+});
+
+// ================= SOCKET EVENTS =================
 io.on("connection", (socket) => {
 
     console.log("✅ User Connected:", socket.id);
