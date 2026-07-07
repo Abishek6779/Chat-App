@@ -5,9 +5,7 @@ const jwt = require("jsonwebtoken");
 // ================= REGISTER =================
 
 const register = async (req, res) => {
-
     try {
-
         const { name, email, password } = req.body;
 
         const userExists = await User.findOne({ email });
@@ -40,22 +38,19 @@ const register = async (req, res) => {
         });
 
     } catch (err) {
+        console.error("REGISTER ERROR:", err);
 
         res.status(500).json({
             success: false,
             message: err.message
         });
-
     }
-
 };
 
 // ================= LOGIN =================
 
 const login = async (req, res) => {
-
     try {
-
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
@@ -77,21 +72,14 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign(
-            {
-                id: user._id
-            },
+            { id: user._id },
             process.env.JWT_SECRET,
-            {
-                expiresIn: "7d"
-            }
+            { expiresIn: "7d" }
         );
 
         res.status(200).json({
-
             success: true,
-
             token,
-
             user: {
                 _id: user._id,
                 name: user.name,
@@ -99,18 +87,16 @@ const login = async (req, res) => {
                 avatar: user.avatar,
                 online: user.online
             }
-
         });
 
     } catch (err) {
+        console.error("LOGIN ERROR:", err);
 
         res.status(500).json({
             success: false,
             message: err.message
         });
-
     }
-
 };
 
 module.exports = {
