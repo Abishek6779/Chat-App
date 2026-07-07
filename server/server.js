@@ -2,6 +2,7 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 const { Server } = require("socket.io");
 
 const connectDB = require("./config/db");
@@ -35,33 +36,26 @@ const io = new Server(server, {
 // Store Online Users
 const onlineUsers = {};
 
-// Middleware
+// ================= MIDDLEWARE =================
+
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Serve frontend
+app.use(express.static(path.join(__dirname, "client")));
+
+// ================= API ROUTES =================
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/upload", uploadRoutes);
-app.use((err, req, res, next) => {
 
-    console.log("========= SERVER ERROR =========");
-    console.error(err);
-    console.log("===============================");
+// ================= HOME =================
 
-    res.status(500).json({
-        success: false,
-        message: err.message
-    });
-
-});
-
-// Home
 app.get("/", (req, res) => {
-    res.send("🚀 ChatConnect Server Running...");
+    res.sendFile(path.join(__dirname, "../client/login.html"));
 });
-
 // ================= SOCKET EVENTS =================
 
 io.on("connection", (socket) => {
