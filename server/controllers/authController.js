@@ -51,9 +51,12 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
+        console.log("LOGIN REQUEST:", req.body);
+
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
+        console.log("USER:", user);
 
         if (!user) {
             return res.status(400).json({
@@ -63,6 +66,7 @@ const login = async (req, res) => {
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log("PASSWORD MATCH:", isMatch);
 
         if (!isMatch) {
             return res.status(400).json({
@@ -76,6 +80,8 @@ const login = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );
+
+        console.log("TOKEN CREATED");
 
         res.status(200).json({
             success: true,
@@ -98,7 +104,6 @@ const login = async (req, res) => {
         });
     }
 };
-
 module.exports = {
     register,
     login
