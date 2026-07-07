@@ -56,9 +56,7 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "login.html"));
 });
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "login.html"));
-});
+
 
 // ================= SOCKET EVENTS =================
 io.on("connection", (socket) => {
