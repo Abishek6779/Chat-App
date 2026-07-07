@@ -31,7 +31,7 @@ form.addEventListener("submit", async (e) => {
 
     try {
 
-        const response = await fetch("https://chat-app-lmnt.onrender.com/api/auth/login",  {
+        const response = await fetch("https://chat-app-lmnt.onrender.com/api/auth/login", {
 
             method: "POST",
 
@@ -46,15 +46,19 @@ form.addEventListener("submit", async (e) => {
 
         });
 
-        const data = await response.json();
+        let data = {};
 
-        if (!response.ok) {
-
-            alert(data.message);
-            return;
-
+        try {
+            data = await response.json();
+        } catch (e) {
+            console.log("Response is not JSON");
         }
 
+        if (!response.ok) {
+            console.error(data);
+            alert(data.message || "Login Failed");
+            return;
+        }
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
@@ -63,9 +67,8 @@ form.addEventListener("submit", async (e) => {
         window.location.href = "chat.html";
 
     } catch (error) {
-
-        alert("Server Error");
-
+        console.error("LOGIN ERROR:", error);
+        alert(error.message);
     }
 
 });
