@@ -52,9 +52,8 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/upload", uploadRoutes);
 
 // ================= HOME =================
-
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/login.html"));
+    res.sendFile(path.join(__dirname, "client", "login.html"));
 });
 // ================= SOCKET EVENTS =================
 
