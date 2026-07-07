@@ -53,7 +53,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/upload", uploadRoutes);
+app.get("/test", (req, res) => {
+    res.json({ message: "Backend is working" });
+});
 
+app.get("/api/test", (req, res) => {
+    res.json({ message: "API is working" });
+});
 // ================= HOME =================
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "login.html"));
