@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChatConnect</title>
+
+    <link rel="stylesheet" href="css/chat.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <div class="sidebar-header">
+
+                <div style="display:flex;align-items:center;gap:10px;">
+
+                    <img
+                        id="profilePreview"
+                        src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                        width="45"
+                        height="45"
+                        style="border-radius:50%;cursor:pointer;"
+                    >
+
+                    <div>
+                        <h2>ChatConnect</h2>
+                    </div>
+
+                </div>
+
+                <button id="logoutBtn">
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
+
+            </div>
+
+            <!-- Hidden profile input -->
+            <input
+                type="file"
+                id="profileInput"
+                accept="image/*"
+                hidden
+            >
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    id="searchUser"
+                    placeholder="Search user..."
+                >
+
+            </div>
+
+            <div class="users" id="userList">
+
+            </div>
+
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+
+            <div class="chat-header">
+
+                <div class="chat-user">
+
+                    <div class="avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
+                    <div>
+
+                        <h3 id="chatName">
+                            Select User
+                        </h3>
+
+                        <p id="chatStatus">
+                            Offline
+                        </p>
+
+                        <p
+                            id="typingStatus"
+                            style="color:#25D366;font-size:13px;margin-top:3px;">
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Messages -->
+            <div class="messages" id="messages">
+
+                <div class="empty-chat">
+
+                    <i class="bi bi-chat-dots"></i>
+
+                    <h2>Welcome to ChatConnect</h2>
+
+                    <p>Select a user to start chatting.</p>
+
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="chat-footer">
+
+                <!-- Emoji -->
+                <button id="emojiBtn">
+                    😊
+                </button>
+
+                <!-- File -->
+                <button id="fileBtn">
+                    <i class="bi bi-paperclip"></i>
+                </button>
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    hidden
+                >
+
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Type your message..."
+                >
+
+                <button id="sendBtn">
+
+                    <i class="bi bi-send-fill"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Emoji Picker -->
+    <script
+        type="module"
+        src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js">
+    </script>
+
+    <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+
+    <script src="js/chat.js"></script>
+
+</body>
+
+</html>
