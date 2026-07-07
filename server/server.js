@@ -44,8 +44,6 @@ app.use(express.json());
 // Serve frontend
 app.use(express.static(path.join(__dirname, "client")));
 
-// Serve frontend
-app.use(express.static(path.join(__dirname, "client")));
 
 // ================= API ROUTES =================
 
