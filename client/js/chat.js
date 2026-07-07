@@ -2,7 +2,7 @@
 // Socket Connection
 // ==========================
 
-const socket = io("http://localhost:5000");
+const socket = io("https://chat-app-lmnt.onrender.com");
 
 // ==========================
 // Authentication
@@ -70,7 +70,7 @@ async function loadUsers() {
 
     try {
 
-        const response = await fetch("http://localhost:5000/api/users", {
+        const response = await fetch("https://chat-app-lmnt.onrender.com/api/users", {
 
             headers: {
                 Authorization: `Bearer ${token}`
@@ -153,8 +153,7 @@ async function loadMessages(userId) {
 
     try {
 
-        const response = await fetch(`http://localhost:5000/api/messages/${userId}`, {
-
+        const response = await fetch(`https://chat-app-lmnt.onrender.com/api/messages/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -178,28 +177,28 @@ async function loadMessages(userId) {
                 div.className = "message received";
 
             }
-div.innerHTML = "";
+            div.innerHTML = "";
 
-if (msg.text) {
+            if (msg.text) {
 
-    div.innerHTML += `<p>${msg.text}</p>`;
+                div.innerHTML += `<p>${msg.text}</p>`;
 
-}
+            }
 
-if (msg.file) {
+            if (msg.file) {
 
-    if (msg.fileType.startsWith("image")) {
+                if (msg.fileType.startsWith("image")) {
 
-        div.innerHTML += `
+                    div.innerHTML += `
             <img
                 src="${msg.file}"
                 style="width:220px;border-radius:12px;margin-top:8px;"
             >
         `;
 
-    } else {
+                } else {
 
-        div.innerHTML += `
+                    div.innerHTML += `
             <a
                 href="${msg.file}"
                 target="_blank"
@@ -208,28 +207,28 @@ if (msg.file) {
             </a>
         `;
 
-    }
+                }
 
-}
+            }
 
-if (msg.sender === currentUser._id) {
+            if (msg.sender === currentUser._id) {
 
-    div.innerHTML += `
+                div.innerHTML += `
         <small class="status">
             ${getStatus(msg.status)}
         </small>
     `;
 
-}
+            }
 
-messages.appendChild(div);
+            messages.appendChild(div);
 
-if (
-    msg.receiver === currentUser._id &&
-    msg.status !== "read"
-) {
-    socket.emit("messageRead", msg._id);
-}
+            if (
+                msg.receiver === currentUser._id &&
+                msg.status !== "read"
+            ) {
+                socket.emit("messageRead", msg._id);
+            }
         });
 
         messages.scrollTop = messages.scrollHeight;
@@ -309,13 +308,13 @@ function sendMessage() {
 
     socket.emit("sendMessage", {
 
-    sender: currentUser._id,
-    receiver: selectedUser._id,
-    text: text,
-    file: "",
-    fileType: ""
+        sender: currentUser._id,
+        receiver: selectedUser._id,
+        text: text,
+        file: "",
+        fileType: ""
 
-});
+    });
 
 
     messageInput.value = "";
@@ -535,7 +534,7 @@ profileInput.onchange = async () => {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/upload/profile",
+            "https://chat-app-lmnt.onrender.com/api/upload/profile",
             {
                 method: "POST",
                 body: formData
@@ -591,7 +590,7 @@ fileInput.onchange = async () => {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/upload/profile",
+            "https://chat-app-lmnt.onrender.com/api/upload/profile",
             {
                 method: "POST",
                 body: formData
